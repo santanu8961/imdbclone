@@ -1,24 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
+import GraphComponent from './components/GraphComponent';
+import MovieListComponent from './components/MovieListComponent';
+import { useState } from 'react';
+import AddMovieComponant from './components/AddMovieComponant';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
 function App() {
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function setModal(bool) {
+    setIsOpen(bool);
+  }
+
   return (
+    <Provider store={store}>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <GraphComponent />
+      <div className={'addMovieDiv'}><button onClick={() => { setModal(true) }} className={'addMovieButton'}>+</button> <span style={{ color: "white" }}>Add Movie</span></div>
+      <AddMovieComponant modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
+
+      <MovieListComponent />
     </div>
+    </Provider>
   );
 }
 
