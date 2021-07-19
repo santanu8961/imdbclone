@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Modal from 'react-modal'
 import { connect } from 'react-redux'
 import { fetchMovieAction } from '../redux/movie/movieAction'
+import { addToMovieList } from '../redux/movieList/movieListAction'
 import { BACKEND_URL } from '../util/consts'
 import MovieSearchResultComponent from './MovieSearchResultComponent'
 // import ReactCSSTransitionGroup from 'react-transition-group'; // ES6
@@ -51,6 +52,8 @@ function AddMovieComponant(props) {
                       {props.movie == {} ? null :<MovieSearchResultComponent movie={props.movie} />}
                     </div>
 
+                    <button onClick={()=>{props.addMovieDataTomovieList(props.movie)}}>Add Movie</button>
+
                 </div>
             </Modal>
           
@@ -75,8 +78,12 @@ const mapDispatchToProps = dispatch =>{
             console.log(res.data);
             dispatch(fetchMovieAction(res.data));
         })
+        },
+        addMovieDataTomovieList:(movieData)=>{
+            dispatch(addToMovieList(movieData));
         }
     }
+
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(AddMovieComponant); 

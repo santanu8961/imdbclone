@@ -1,15 +1,36 @@
 import React from 'react'
 
 import { Bar } from 'react-chartjs-2';
+import { connect } from 'react-redux';
 
 
-function GraphComponent() {
+function GraphComponent(props) {
+
+  console.log('Graphprops',props);
+
+  const lebels = ()=>{
+    let l = []
+    props.movieList.forEach(element => {
+      l.push(element.Title);
+    });
+    return l;
+  }
+
+  const rating = ()=>{
+    let d = [];
+    props.movieList.forEach(element => {
+      d.push(element.imdbRating);
+    });
+    return d;
+
+  }
+
   const data = {
-    labels: ['A', 'B', 'C', 'D', 'E', 'F'],
+    labels: lebels(),
     datasets: [
       {
-        label: '# of Votes',
-        data: [10, 8, 3, 5, 2, 3],
+        label: 'IMDB Rating',
+        data:rating(),
         fill: false,
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgba(255, 99, 132, 0.2)',
@@ -42,4 +63,18 @@ function GraphComponent() {
   )
 }
 
-export default GraphComponent
+const mapStateToprops = (state)=>{
+  return{
+    movieList:state.movieList.movieList
+  }
+}
+
+
+
+const mapDispatchToprops = dispatch=>{
+  return {
+
+  }
+}
+
+export default connect(mapStateToprops,mapDispatchToprops)(GraphComponent) 
