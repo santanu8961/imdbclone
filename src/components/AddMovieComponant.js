@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 import { connect } from 'react-redux'
 import { fetchMovieAction } from '../redux/movie/movieAction'
 import { addToMovieList } from '../redux/movieList/movieListAction'
-import { BACKEND_URL } from '../util/consts'
+import { BACKEND_URL, isEmpty } from '../util/consts'
 import MovieSearchResultComponent from './MovieSearchResultComponent'
 // import ReactCSSTransitionGroup from 'react-transition-group'; // ES6
 
@@ -13,9 +13,6 @@ function AddMovieComponant(props) {
 
 
     const [movieInp, setmovieInp] = useState('')
-
-
-    console.log('props.movie',props.movie)
 
 
     const customStyles = {
@@ -40,6 +37,7 @@ function AddMovieComponant(props) {
 
                     <div className={'searchDiv'}>
                         <input
+                            placeholder={'Enter Movie Name Here'}
                             style={{ backgroundColor: "inherit", padding: '2%', width: '100%', color: "white", borderRadius: "10px" }}
                             onChange={(e) => { setmovieInp(e.target.value) }}
                             value={movieInp}
@@ -49,10 +47,10 @@ function AddMovieComponant(props) {
 
                     <div className={'MovieSearchResultDiv'}>
 
-                      {props.movie == {} ? null :<MovieSearchResultComponent movie={props.movie} />}
+                      {isEmpty(props.movie)  ? null :<MovieSearchResultComponent addMovieDataTomovieList={props.addMovieDataTomovieList} movie={props.movie} />}
                     </div>
 
-                    <button onClick={()=>{props.addMovieDataTomovieList(props.movie)}}>Add Movie</button>
+                   
 
                 </div>
             </Modal>
@@ -67,16 +65,18 @@ const mapStateToProps = state =>{
     }
 }
 
-const mapDispatchToProps = dispatch =>{
+const mapDispatchToProps = (dispatch,ownProps) =>{
     return{
         fetchMovieData: (val)=> {
             if(val==''){
                 dispatch(fetchMovieAction({}));
                 return;
             }
+            ownProps.setisLoading(true);
         axios.get(BACKEND_URL(val)).then(res=>{
             console.log(res.data);
             dispatch(fetchMovieAction(res.data));
+            ownProps.setisLoading(false);
         })
         },
         addMovieDataTomovieList:(movieData)=>{
