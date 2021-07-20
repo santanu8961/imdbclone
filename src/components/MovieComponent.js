@@ -19,8 +19,11 @@ function MovieComponent(props) {
 const mapdispatchToprops = (dispatch)=>{
         return{
             removeFrommovieListFunc:(i)=>{
-                dispatch(removefromMovieList(i));
+                if(window.confirm('Are you Sure?')){
+                    dispatch(removefromMovieList(i));
                 triggerNotification('success','Movie Deleted SuccessFully')
+                }
+                
             }
         }
 }

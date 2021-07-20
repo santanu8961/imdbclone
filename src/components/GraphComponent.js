@@ -2,6 +2,8 @@ import React from 'react'
 
 import { Bar } from 'react-chartjs-2';
 import { connect } from 'react-redux';
+import { removefromMovieList } from '../redux/movieList/movieListAction';
+import { triggerNotification } from '../util/consts';
 
 
 function GraphComponent(props) {
@@ -41,7 +43,9 @@ function GraphComponent(props) {
 
   const options = {
     onClick: (evt, elem) => {
-      console.log(elem)
+    
+     if(elem.length) {if(window.confirm("Are you Sure?")) props.removeFrommovieListFunc(elem[0].index)}
+      
     },
     maintainAspectRatio: false,
     scales: {
@@ -69,12 +73,14 @@ const mapStateToprops = (state)=>{
   }
 }
 
-
-
-const mapDispatchToprops = dispatch=>{
-  return {
-
+const mapdispatchToprops = (dispatch)=>{
+  return{
+      removeFrommovieListFunc:(i)=>{
+          dispatch(removefromMovieList(i));
+          triggerNotification('success','Movie Deleted SuccessFully')
+      }
   }
 }
 
-export default connect(mapStateToprops,mapDispatchToprops)(GraphComponent) 
+
+export default connect(mapStateToprops,mapdispatchToprops)(GraphComponent) 

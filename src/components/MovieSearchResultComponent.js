@@ -41,12 +41,12 @@ function MovieSearchResultComponent(props) {
                      <p >Type: {props.movie.Type}</p>
                      <p>Plot:<span style={{fontSize:"0.8em"}}>{props.movie.Plot}</span></p>
                  </header>
-            <button className={'AddmovieToListButton'} onClick={()=>{if(!checkDuplicate(props.movieList,props.movie))props.addMovieDataTomovieList(props.movie)}}>Add Movie To List</button>
+            <button className={props.movie.imdbRating =="N/A"?'AddmovieToListButton disable':'AddmovieToListButton'} disabled={props.movie.imdbRating =="N/A"} onClick={()=>{if(!checkDuplicate(props.movieList,props.movie))props.addMovieDataTomovieList(props.movie)}}>Add Movie To List</button>
              </div>  
              <div className={'RatingDiv'}>
                 <p style={{fontSize:"1.5em",textAlign:'center'}}> Rating </p>
                 <CircularProgressbar  styles={buildStyles({trailColor:"rgba(10, 0, 20, 40)", pathColor:'rgba(202, 49, 120, 0.6)'})} text={
-                    props.movie.imdbRating =="N/A"?0:(Math.floor(parseFloat(props.movie.imdbRating)*10)+"%")
+                    props.movie.imdbRating =="N/A"?props.movie.imdbRating:(Math.floor(parseFloat(props.movie.imdbRating)*10)+"%")
                 } value={
                     props.movie.imdbRating =="N/A"?0:(parseFloat(props.movie.imdbRating)*10)
                     } />
