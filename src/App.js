@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import GraphComponent from './components/GraphComponent';
 import MovieListComponent from './components/MovieListComponent';
@@ -7,6 +6,11 @@ import AddMovieComponant from './components/AddMovieComponant';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import LoaderComponent from './components/LoaderComponent';
+import {NotificationContainer} from 'react-notifications';
+import "../node_modules/react-notifications/dist/react-notifications.css";
+
+
+
 
 function App() {
 
@@ -19,6 +23,7 @@ function App() {
 
   return (
     <Provider store={store}>
+      <NotificationContainer /> 
     <div className="App">
      <LoaderComponent isLoading={isLoading} />
       <GraphComponent />

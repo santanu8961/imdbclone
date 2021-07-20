@@ -6,7 +6,7 @@ function LoaderComponent(props) {
         return (
        
             <div className={'loaderDiv'}>
-                <img style={{width:'10vw'}}  src={`${process.env.PUBLIC_URL}/loader.gif`} />
+                <img alt="loading..." style={{width:'10vw'}}  src={`${process.env.PUBLIC_URL}/loader.gif`} />
                 </div>
       
    )

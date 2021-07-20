@@ -4,7 +4,7 @@ const initialState = {
     movieData:{}
 }
 
-const movieReducer=(state =initialState ,action)=>{
+const MovieReducer=(state =initialState ,action)=>{
     switch (action.type) {
         case FETCH_MOVIE_REQUEST:
                 return {
@@ -15,4 +15,4 @@ const movieReducer=(state =initialState ,action)=>{
     return state;
 } 
 
-export default movieReducer;
+export default MovieReducer;

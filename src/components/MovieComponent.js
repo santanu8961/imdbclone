@@ -1,9 +1,12 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { removefromMovieList } from '../redux/movieList/movieListAction'
+import { triggerNotification } from '../util/consts'
 
 function MovieComponent(props) {
     return (
         <div className={'MovieComponent'}>
-             <a className = "x">X</a>
+             <a onClick={()=>{props.removeFrommovieListFunc(props.index)}} className = "x">X</a>
             
         
           <div className={'imgContainer'}>  <img className={'img'} src={props.movieData.Poster} /></div>
@@ -12,4 +15,17 @@ function MovieComponent(props) {
     )
 }
 
-export default MovieComponent
+
+const mapdispatchToprops = (dispatch)=>{
+        return{
+            removeFrommovieListFunc:(i)=>{
+                dispatch(removefromMovieList(i));
+                triggerNotification('success','Movie Deleted SuccessFully')
+            }
+        }
+}
+
+
+
+
+export default connect(null,mapdispatchToprops)(MovieComponent); 

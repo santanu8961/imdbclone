@@ -27,7 +27,7 @@ canvas{
 }
 
 .MovieSearchResultImg{
-  width: 40%;
+  width: 27vh;
 }
 
 .x{
@@ -72,7 +72,7 @@ canvas{
 }
 
 .MovieSearchResultDiv{
-  position: absolute;
+  position: relative;
   width: 70vw;
   height: 52vh;
   top: 22vh;
@@ -84,10 +84,29 @@ canvas{
 }
 
 .MovieSearchResultImgDiv{
-  left: 2vw;
-  position: absolute;
-  top:2vh
-  
+  padding-top:4%;
+text-align: center;
+  width:30%
+}
+.AddmovieToListButton:hover{
+  background-color: rgba(202, 49, 120, 0.6);
+}
+
+.AddmovieToListButton{
+  box-shadow: 2px 3px 11px 3px rgba(255,255,255,0.1);
+  margin: 1vh 0vw;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 3% 0% ;
+  width: 100%;
+  background-color: rgba(10, 0, 20, 40) ;
+  color: white;
+
+}
+
+ p {
+  margin-block-start: 0.7em !important;
+    margin-block-end: 0.7em !important;
 }
 
 .addMovieButton{
@@ -98,6 +117,18 @@ canvas{
   box-shadow: 2px 3px 8px 3px rgba(255,255,255,0.1);
   color:white;
   font-size: medium;
+}
+
+.metaDataDiv{
+  width:45%;
+  padding-top: 2%;
+}
+
+.RatingDiv{
+width:25%;
+padding-left: 1%;
+padding-right: 2%;
+padding-top: 2%;
 }
 
 .addMovieDiv{
@@ -264,9 +295,11 @@ body{
 }
 .MovieSearchResultDiv{
   top: 20vh;
+  flex-direction: column;
 }
 .MovieSearchResultImg{
-  width: 40%;
+  width: 12vh;
+  text-align: center;
 }
 .imgContainer{
   height:12vh;
@@ -279,5 +312,20 @@ body{
 }
 .MovieComponent{
   width:25vw
+}
+.MovieSearchResultImgDiv{
+  width: 100%;
+  height:40%
+}
+.metaDataDiv{
+width:100%;
+height:60%;
+font-size: 0.7em !important;
+text-align: center !important;
+padding-top:0 !important;
+}
+.RatingDiv{display: none;}
+.AddmovieToListButton{
+  width: 80%;
 }
 }

@@ -11,7 +11,7 @@ function MovieListComponent(props) {
         <div className={"MovieListComponent"}>
             <button onClick={() => { ref.current.scrollLeft -= 100 }} style={{ left: "2.5vw", top: "7.5vh", position: "absolute" }} className={"addMovieButton"}>{"<"}</button>
             <div ref={ref} className={"MovieListArea"}>
-                {props.movieList.length == 0 ? <div className={"NoDataDiv"}>{"Nothing to Display"}</div>:props.movieList.map(elem => <MovieComponent movieData={elem} />)}
+                {props.movieList.length ===0 ? <div className={"NoDataDiv"}>{"Nothing to Display"}</div>:props.movieList.map((elem,i) => <MovieComponent key={i} index={i} movieData={elem} />)}
             </div>
             <button onClick={() => { ref.current.scrollLeft += 100 }} style={{ right: "2.5vw", position: "absolute", top: "7.5vh" }} className={"addMovieButton"}>{">"}</button>
         </div>
@@ -28,7 +28,7 @@ const mapStateToprops = (state)=>{
   
   const mapDispatchToprops = dispatch=>{
     return {
-  
+      
     }
   }
 

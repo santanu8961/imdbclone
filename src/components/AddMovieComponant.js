@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 import { connect } from 'react-redux'
 import { fetchMovieAction } from '../redux/movie/movieAction'
 import { addToMovieList } from '../redux/movieList/movieListAction'
-import { BACKEND_URL, isEmpty } from '../util/consts'
+import { BACKEND_URL, isEmpty, triggerNotification } from '../util/consts'
 import MovieSearchResultComponent from './MovieSearchResultComponent'
 // import ReactCSSTransitionGroup from 'react-transition-group'; // ES6
 
@@ -12,7 +12,11 @@ import MovieSearchResultComponent from './MovieSearchResultComponent'
 function AddMovieComponant(props) {
 
 
-    const [movieInp, setmovieInp] = useState('')
+    const [movieInp, setmovieInp] = useState('');
+
+
+
+   
 
 
     const customStyles = {
@@ -31,7 +35,7 @@ function AddMovieComponant(props) {
     return (
         <div className={'AddMovieComponant'}>
            
-            <Modal isOpen={props.modalIsOpen} style={customStyles}>
+            <Modal ariaHideApp={false} isOpen={props.modalIsOpen} style={customStyles}>
                 <div className={"AddMovieComponantdiv"}>
                     <a onClick={() => { props.setIsOpen(false) ; props.fetchMovieData('');setmovieInp('') }} className={'closeButton'}>X</a>
 
@@ -42,7 +46,7 @@ function AddMovieComponant(props) {
                             onChange={(e) => { setmovieInp(e.target.value) }}
                             value={movieInp}
                         />
-                        <a  onClick={()=>{props.fetchMovieData(movieInp)}} className={movieInp=="" ? 'searchButton disableLink':"searchButton"}>Search</a>
+                        <button  onClick={()=>{props.fetchMovieData(movieInp)}} className={movieInp==="" ? 'searchButton disableLink':"searchButton"}>Search</button>
                     </div>
 
                     <div className={'MovieSearchResultDiv'}>
@@ -68,7 +72,7 @@ const mapStateToProps = state =>{
 const mapDispatchToProps = (dispatch,ownProps) =>{
     return{
         fetchMovieData: (val)=> {
-            if(val==''){
+            if(val===''){
                 dispatch(fetchMovieAction({}));
                 return;
             }
@@ -81,6 +85,7 @@ const mapDispatchToProps = (dispatch,ownProps) =>{
         },
         addMovieDataTomovieList:(movieData)=>{
             dispatch(addToMovieList(movieData));
+            triggerNotification("success","Movie Added");
         }
     }
 
