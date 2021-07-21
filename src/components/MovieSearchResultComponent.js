@@ -34,7 +34,7 @@ function MovieSearchResultComponent(props) {
              <div className={'metaDataDiv'}>
                 
                  <header>
-                     <p style={{fontSize:"1.5em"}}>Title: <b>{props.movie.Title}</b></p>
+                     <p style={{fontSize:"1.5em"}}><b>{props.movie.Title}</b></p>
                      <p style={{fontSize:"1.2em"}}>IMDB Rating: <b>{props.movie.imdbRating}</b></p>
                      <p >Language: {props.movie.Language}</p>
                      <p >Country: {props.movie.Country}</p>
